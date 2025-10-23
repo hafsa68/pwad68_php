@@ -8,9 +8,9 @@
 <body>
 
 <?php 
-//$_GET $_POST $_REQUEST
+// $_GET $_POST $_REQUEST;
 // echo "<pre>";
-// print_r($_POST); //form er data dorar jonno
+// print_r($_GET); //form er data dorar jonno
 // echo "</pre>";
 
 // $name = $_GET['name'];

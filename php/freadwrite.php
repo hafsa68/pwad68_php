@@ -14,7 +14,7 @@ while(!feof($fh)){
 }
 
 
-fwrite($fh,"Hello karimul lorrrem\n");
+ fwrite($fh,"Hello karimul lorrrem\n");
 fclose($fh); //close file
 ?>
 

@@ -41,3 +41,32 @@ echo "what\n is $n";
 ?>
 
 <hr>
+<hr>
+
+<?php
+
+// $n =0 ;
+
+// while($n <=10){
+//     if($n<=5){
+//         continue;
+//     }
+
+//     print $n;
+//     $n = $n + 1;
+// }
+
+?>
+
+<hr>
+
+<?php
+
+$str = "good";
+
+$ustr = "bye";
+echo $$str;
+
+?>
+
+<hr>

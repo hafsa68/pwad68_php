@@ -11,7 +11,7 @@ if($db-> connect_error){
 //echo "connected successfully";
 
 
-
+ob_start();
 //$conn->close();
  $project_url ="http://localhost/pwad68/php/php_project/admin/";
 ?>

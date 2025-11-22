@@ -1,5 +1,6 @@
 
 <?php include_once("../includes/db_config.php") ?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +30,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Student Entry</h1>
+            <h1>Student Edit</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -40,8 +41,21 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
+    <!-- ONE Student Record -->
+
+    <?php
+   $id = $_REQUEST['stid'];
+   $sql ="SELECT * FROM students WHERE employeeID ='$id'";
+   $rawdata = $db->query($sql);
+   $row = $rawdata ->fetch_array();
+   
+
+
+
+    ?>
 
     <!-- Main content -->
+
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -50,12 +64,17 @@
             <!-- jquery validation -->
              <?php 
               
-              if(isset($_REQUEST['submit'])){
+              if(isset($_REQUEST['update'])){
                 extract($_REQUEST);
-                $sql = "INSERT INTO students VALUES (NULL,'$fname','$lname','$bdate','$notes')";
+                $sql = "UPDATE students SET first_name ='$fname',last_name = '$lname', birthdate='$bdate' WHERE employeeID ='$id'";
                 $db->query($sql);
                 if ($db->affected_rows){
-                  echo '<div class="alert alert-success"> Successfully Inserted </div>';
+
+                    session_start();
+                    $_SESSION['msg'] = "successfully Update";
+                    header("Location:index.php");
+
+                //   echo '<div class="alert alert-success"> Successfully Updated </div>';
                 }
               }
               
@@ -76,15 +95,15 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">First Name</label>
-                    <input type="text" name="fname" class="form-control" id="exampleInputEmail1" placeholder="Enter First Name">
+                    <input type="text" name="fname" value="<?php echo $row['first_name'] ;?>" class="form-control" id="exampleInputEmail1" placeholder="Enter First Name">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Last Name</label>
-                    <input type="text" name="lname" class="form-control" id="exampleInputEmail1" placeholder="Enter Last Name">
+                    <input type="text" name="lname" value="<?php echo $row['last_name'] ;?>" class="form-control" id="exampleInputEmail1" placeholder="Enter Last Name">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Birth Date</label>
-                    <input type="date" name="bdate" class="form-control" id="exampleInputEmail1" placeholder="Enter birthdate">
+                    <input type="date" name="bdate" class="form-control" value="<?php echo $row['birthdate'] ;?>" id="exampleInputEmail1" placeholder="Enter birthdate">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Notes</label>
@@ -94,7 +113,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary"  name="submit">Submit</button>
+                  <button type="submit" class="btn btn-primary"  name="update">UPDATE</button>
                 </div>
               </form>
             </div>

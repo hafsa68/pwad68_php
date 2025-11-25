@@ -23,8 +23,14 @@
     $password = md5($password);
     $sql ="SELECT * FROM admins WHERE email='$email' AND password='$password'";
      $record = $db->query($sql);
+     $row = $record->fetch_assoc();
      $data = $record->num_rows;
       if($data>0){
+        session_start();
+        $_SESSION['loggedin'] = true;
+        $_SESSION['email'] = $email;
+        $_SESSION['name'] = $row['name'];
+        $_SESSION['photo'] = $row['photo'];
         header("Location:deshbord.php");
       }
   }

@@ -13,5 +13,5 @@ if($db-> connect_error){
 
 
 //$conn->close();
-// $project_url = "http://localhost/pwad68/php_project/admin/";
+$project_url = "http://localhost/pwad68/php_project/admin/";
 ?>

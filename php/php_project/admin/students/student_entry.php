@@ -1,5 +1,11 @@
 
 <?php include_once("../includes/db_config.php") ?>
+<?php
+session_start();
+if(!isset($_SESSION['loggedin'])){
+  header("Location:index.php");
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +58,19 @@
               
               if(isset($_REQUEST['submit'])){
                 extract($_REQUEST);
-                $sql = "INSERT INTO students VALUES (NULL,'$fname','$lname','$bdate','$notes')";
+               
+               if($_FILES['photo'] !=""){
+                $photo_name =  $_FILES['photo']['name'];
+               $tmp_name =  $_FILES['photo']['tmp_name'];
+               $upload_url = "students/uploads/". $photo_name;
+               
+               move_uploaded_file($tmp_name, "uploads/". $photo_name);
+               }
+
+                
+
+
+                $sql = "INSERT INTO students VALUES (NULL,'$fname','$lname','$bdate','$notes','$upload_url')";
                 $db->query($sql);
                 if ($db->affected_rows){
                   echo '<div class="alert alert-success"> Successfully Inserted </div>';
@@ -72,7 +90,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="" method="post">
+              <form id="quickForm" action="" method="post" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">First Name</label>
@@ -89,6 +107,10 @@
                   <div class="form-group">
                     <label for="exampleInputPassword1">Notes</label>
                     <textarea name="notes" class="form-control" rows="4"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Photo</label>
+                    <input type="file" name="photo">
                   </div>
                  
                 </div>
@@ -138,7 +160,7 @@
 <!-- AdminLTE App -->
 <script src="<?php echo $project_url ?>/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<?php echo $project_url ?>/dist/js/demo.js"></script>
+<!-- <script src="<?php echo $project_url ?>/dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <!-- <script>
 $(function () {

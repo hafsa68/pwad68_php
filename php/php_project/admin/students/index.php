@@ -1,5 +1,8 @@
 <?php include_once("../includes/db_config.php");
-session_start(); ?>
+session_start();
+if(!isset($_SESSION['loggedin'])){
+  header("Location:index.php");
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 

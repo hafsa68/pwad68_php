@@ -49,6 +49,7 @@
         </tr>
         <?php endwhile; ?>
     </table>
+    <a href="product.php">CLICK</a>
 </body>
 
 

@@ -80,7 +80,7 @@ Approve payments (if manual)
 
 View total sales
 
-💰 How Course Selling Works
+*** How Course Selling Works
 Step-by-step:
 
 Student clicks Buy Course
